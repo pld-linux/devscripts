@@ -2,7 +2,7 @@
 Summary:	Scripts for Debian Package maintainers
 Name:		devscripts
 Version:	2.13.9
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		Development
 Source0:	http://ftp.debian.org/debian/pool/main/d/devscripts/%{name}_%{version}.tar.xz
@@ -41,6 +41,10 @@ Scripts to make the life of a Debian Package maintainer easier.
 
 %package -n checkbashisms
 Summary:	Check shell scripts for common bash-specific contructs
+Group:		Development
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n checkbashisms
 checkbashisms checks whether a /bin/sh script contains any common
@@ -68,7 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 	LIBDIR=%{_libdir}/%{name}
 
 # Install docs through %doc
-rm -rf $RPM_BUILD_ROOT%{_docdir}
+rm -r $RPM_BUILD_ROOT%{_docdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -80,12 +84,13 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_bindir}/checkbashisms
 %{_mandir}/man1/*
 %exclude %{_mandir}/man1/checkbashisms.1*
-%{_libdir}/%{name}
+%dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/libvfork.so.0
 %{py3_sitescriptdir}/%{name}
 %{py3_sitescriptdir}/%{name}*.egg-info
 %{_datadir}/%{name}
 
-%{_sysconfdir}/bash_completion.d/*
+/etc/bash_completion.d/*
 
 %files -n checkbashisms
 %defattr(644,root,root,755)
