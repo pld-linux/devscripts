@@ -1,0 +1,33 @@
+diff -rupN devscripts-2.13.3/po4a/Makefile devscripts-2.13.3-new/po4a/Makefile
+--- devscripts-2.13.3/po4a/Makefile	2013-08-16 02:01:22.000000000 +0200
++++ devscripts-2.13.3-new/po4a/Makefile	2013-09-19 18:03:22.092429895 +0200
+@@ -25,7 +25,7 @@ de/%.de.1: de/%.de.pl translate
+ 	pod2man --utf8 --center=" " --release="Debian-Hilfswerkzeuge" $< > $@
+ de/%.de.1: de/%.de.dbk translate
+ 	xsltproc --nonet -o $@ \
+-	  /usr/share/sgml/docbook/stylesheet/xsl/nwalsh/manpages/docbook.xsl $<
++	  /usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl $<
+ # xsltproc writes out to foo.1 even if you tell it to do otherwise, so we have
+ # to rename the file after it's generated
+ 	mv de/$*.1 $@
+@@ -35,7 +35,7 @@ fr/%.fr.1: fr/%.fr.pl translate
+ 	pod2man --utf8 --center=" " --release="Utilitaires Debian" $< > $@
+ fr/%.fr.1: fr/%.fr.dbk translate
+ 	xsltproc --nonet -o $@ \
+-	  /usr/share/sgml/docbook/stylesheet/xsl/nwalsh/manpages/docbook.xsl $<
++	  /usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl $<
+ # xsltproc writes out to foo.1 even if you tell it to do otherwise, so we have
+ # to rename the file after it's generated
+ 	mv fr/$*.1 $@
+diff -rupN devscripts-2.13.3/scripts/Makefile devscripts-2.13.3-new/scripts/Makefile
+--- devscripts-2.13.3/scripts/Makefile	2013-08-16 02:01:22.000000000 +0200
++++ devscripts-2.13.3-new/scripts/Makefile	2013-09-19 18:03:22.264433043 +0200
+@@ -61,7 +61,7 @@ endif
+ 	pod2man --utf8 --center=" " --release="Debian Utilities" $< > $@
+ %.1: %.dbk
+ 	xsltproc --nonet -o $@ \
+-	  /usr/share/sgml/docbook/stylesheet/xsl/nwalsh/manpages/docbook.xsl $<
++	  /usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl $<
+ 
+ # There is a slight chance this gets called twice, once here from here and once
+ # from ../po4a/Makefile. Treat files with care.
