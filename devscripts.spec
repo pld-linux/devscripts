@@ -1,12 +1,12 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	Scripts for Debian Package maintainers
 Name:		devscripts
-Version:	2.13.9
+Version:	2.14.5
 Release:	1
 License:	GPL v2+
 Group:		Development
 Source0:	http://ftp.debian.org/debian/pool/main/d/devscripts/%{name}_%{version}.tar.xz
-# Source0-md5:	a55e715d41cd45c465fa937683e8e5dd
+# Source0-md5:	5271ab6e12349865dd7ab686f1010808
 # Fixes path to xsl-stylesheet manpages docbook.xsl
 Patch0:		%{name}_docbook.patch
 # Removes the debian-only --install-layout python-setuptools option
