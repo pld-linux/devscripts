@@ -1,19 +1,18 @@
+# TODO
+# - bash-completions subpackage
 %include	/usr/lib/rpm/macros.perl
 Summary:	Scripts for Debian Package maintainers
 Name:		devscripts
-Version:	2.14.5
-Release:	2
+Version:	2.15.1
+Release:	1
 License:	GPL v2+
 Group:		Development
 Source0:	http://ftp.debian.org/debian/pool/main/d/devscripts/%{name}_%{version}.tar.xz
-# Source0-md5:	5271ab6e12349865dd7ab686f1010808
-# Fixes path to xsl-stylesheet manpages docbook.xsl
+# Source0-md5:	7c46c0f19205d2022184972ce6390a15
 Patch0:		%{name}_docbook.patch
-# Removes the debian-only --install-layout python-setuptools option
 Patch1:		%{name}_install-layout.patch
-# Install some additional man pages
 Patch2:		%{name}_install-man.patch
-URL:		http://packages.debian.org/unstable/admin/devscripts
+URL:		https://packages.debian.org/unstable/admin/devscripts
 BuildRequires:	docbook-style-xsl
 BuildRequires:	dpkg
 BuildRequires:	libxslt
@@ -68,7 +67,8 @@ sed -i 's|%{_prefix}/lib/devscripts/libvfork.so.0|%{_libdir}/%{name}/libvfork.so
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%make_install \
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
 	LIBDIR=%{_libdir}/%{name}
 
 # Install docs through %doc

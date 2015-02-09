@@ -1,3 +1,4 @@
+# Removes the debian-only --install-layout python-setuptools option
 diff -rupN devscripts-2.13.3/scripts/Makefile devscripts-2.13.3-new/scripts/Makefile
 --- devscripts-2.13.3/scripts/Makefile	2013-08-16 02:01:22.000000000 +0200
 +++ devscripts-2.13.3-new/scripts/Makefile	2013-09-19 18:05:52.040168029 +0200

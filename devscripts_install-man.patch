@@ -1,3 +1,4 @@
+# Install some additional man pages
 diff -rupN devscripts-2.13.4/scripts/Makefile devscripts-2.13.4-new/scripts/Makefile
 --- devscripts-2.13.4/scripts/Makefile	2013-09-20 00:55:41.000000000 +0200
 +++ devscripts-2.13.4-new/scripts/Makefile	2013-10-17 17:21:02.612017885 +0200
