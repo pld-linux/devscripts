@@ -32,6 +32,7 @@ BuildRequires:	xz
 Requires:	%{_bindir}/man
 Requires:	checkbashisms = %{version}-%{release}
 #Requires:	dpkg-dev
+#Requires:	sensible-utils
 Conflicts:	rpmdevtools < 8.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,6 +55,15 @@ bash-specific contructs.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+
+# PLD package names
+# grep -r 'you must have the.*package installed' .
+%{__sed} -i -e 's/liburi-perl/perl-URI/g' scripts/*.pl
+%{__sed} -i -e 's/liblwp-protocol-https-perl/perl-LWP-Protocol-https/g' scripts/*.pl
+%{__sed} -i -e 's/libtimedate-perl/perl-TimeDate/g' scripts/*.pl
+%{__sed} -i -e 's/libfile-desktopentry-perl/perl-File-DesktopEntry/g' scripts/*.pl
+%{__sed} -i -e 's/libwww-perl/perl-libwww/g' scripts/*.pl
+%{__sed} -i -e 's/libdigest-md5-perl/perl-Digest-MD5/g' scripts/*.pl
 
 # Search for libvfork in %{_libdir}/%{name}
 sed -i 's|%{_prefix}/lib/devscripts/libvfork.so.0|%{_libdir}/%{name}/libvfork.so.0|g' scripts/dpkg-depcheck.pl
