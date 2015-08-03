@@ -14,19 +14,23 @@ Patch0:		%{name}_docbook.patch
 Patch1:		%{name}_install-layout.patch
 Patch2:		%{name}_install-man.patch
 URL:		https://packages.debian.org/unstable/admin/devscripts
+BuildRequires:	docbook-dtd42-xml
 BuildRequires:	docbook-style-xsl
 BuildRequires:	dpkg
+BuildRequires:	gettext-tools
 BuildRequires:	libxslt
+BuildRequires:	libxslt-progs
 BuildRequires:	perl-DB_File
 BuildRequires:	perl-File-DesktopEntry
-BuildRequires:	perl-Parse-DebControl
 BuildRequires:	perl-base
 BuildRequires:	perl-libwww
 BuildRequires:	perl-modules
+BuildRequires:	pkgconfig
 BuildRequires:	po4a
 BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
 BuildRequires:	rpm-perlprov >= 4.1-13
+BuildRequires:	rpm-pythonprov
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 # man for manpage-alert
