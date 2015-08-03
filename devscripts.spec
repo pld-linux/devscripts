@@ -66,9 +66,6 @@ bash-specific contructs.
 %{__sed} -i -e 's/libwww-perl/perl-libwww/g' scripts/*.pl
 %{__sed} -i -e 's/libdigest-md5-perl/perl-Digest-MD5/g' scripts/*.pl
 
-# Search for libvfork in %{_libdir}/%{name}
-sed -i 's|%{_prefix}/lib/devscripts/libvfork.so.0|%{_libdir}/%{name}/libvfork.so.0|g' scripts/dpkg-depcheck.pl
-
 %build
 # LIBDIR determines where libvfork gets installed, see scripts/Makefile for LIBDIR
 %{__make} \
@@ -233,4 +230,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/checkbashisms
 %{_mandir}/man1/checkbashisms.1*
-
