@@ -1,15 +1,7 @@
-# Install some additional man pages
-diff -rupN devscripts-2.13.4/scripts/Makefile devscripts-2.13.4-new/scripts/Makefile
+Install some additional man pages
+
 --- devscripts-2.13.4/scripts/Makefile	2013-09-20 00:55:41.000000000 +0200
 +++ devscripts-2.13.4-new/scripts/Makefile	2013-10-17 17:21:02.612017885 +0200
-@@ -27,6 +27,7 @@ GEN_MAN1S += devscripts.1
- BINDIR = /usr/bin
- LIBDIR = /usr/lib/devscripts
- BIN_LIBDIR = /usr/lib/devscripts
-+MAN1DIR = /usr/share/man/man1
- 
- all: $(SCRIPTS) $(GEN_MAN1S) $(LIBS) $(CWRAPPERS) $(COMPLETION)
- 
 @@ -103,5 +104,7 @@ install: all
  	install -dD $(DESTDIR)$(PERLMOD_DIR)
  	mv $(DESTDIR)$(BINDIR)/debpkg $(DESTDIR)$(PERLMOD_DIR)

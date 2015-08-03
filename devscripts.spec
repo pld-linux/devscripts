@@ -1,14 +1,15 @@
 # TODO
 # - bash-completions subpackage
+# - some junk installed to root: "/devscripts.*"
 %include	/usr/lib/rpm/macros.perl
 Summary:	Scripts for Debian Package maintainers
 Name:		devscripts
-Version:	2.15.1
+Version:	2.15.7
 Release:	1
 License:	GPL v2+
 Group:		Development
 Source0:	http://ftp.debian.org/debian/pool/main/d/devscripts/%{name}_%{version}.tar.xz
-# Source0-md5:	7c46c0f19205d2022184972ce6390a15
+# Source0-md5:	1655e2c91e42cd48393c65726bc3faa9
 Patch0:		%{name}_docbook.patch
 Patch1:		%{name}_install-layout.patch
 Patch2:		%{name}_install-man.patch
@@ -94,15 +95,13 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_bindir}/checkbashisms
 %{_mandir}/man1/*
 %exclude %{_mandir}/man1/checkbashisms.1*
-%dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/libvfork.so.0
 %{py3_sitescriptdir}/%{name}
 %{py3_sitescriptdir}/%{name}*.egg-info
 %{_datadir}/%{name}
-
-/etc/bash_completion.d/*
+%{perl_vendorlib}/Devscripts
 
 %files -n checkbashisms
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/checkbashisms
 %{_mandir}/man1/checkbashisms.1*
+

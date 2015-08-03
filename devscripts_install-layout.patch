@@ -1,13 +1,13 @@
-# Removes the debian-only --install-layout python-setuptools option
-diff -rupN devscripts-2.13.3/scripts/Makefile devscripts-2.13.3-new/scripts/Makefile
---- devscripts-2.13.3/scripts/Makefile	2013-08-16 02:01:22.000000000 +0200
-+++ devscripts-2.13.3-new/scripts/Makefile	2013-09-19 18:05:52.040168029 +0200
-@@ -92,7 +92,7 @@ test:
+Removes the debian-only --install-layout python-setuptools option
+
+--- devscripts-2.15.7/scripts/Makefile~	2015-08-03 09:38:41.000000000 +0300
++++ devscripts-2.15.7/scripts/Makefile	2015-08-03 09:39:15.202484554 +0300
+@@ -86,7 +86,7 @@
  	$(foreach python,$(shell py3versions -r ../debian/control),$(python) setup.py test$(\n))
  
  install: all
 -	python3 setup.py install --root="$(DESTDIR)" --no-compile --install-layout=deb
 +	python3 setup.py install --root="$(DESTDIR)" --no-compile
- 	install -dD $(DESTDIR)$(BINDIR) $(DESTDIR)$(LIBDIR)
  	cp $(SCRIPTS) $(DESTDIR)$(BINDIR)
  	ln -sf edit-patch $(DESTDIR)$(BINDIR)/add-patch
+ 	install -d $(DESTDIR)$(COMPL_DIR)
