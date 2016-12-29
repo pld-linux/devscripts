@@ -5,7 +5,7 @@
 Summary:	Scripts for Debian Package maintainers
 Name:		devscripts
 Version:	2.15.7
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Development
 Source0:	http://ftp.debian.org/debian/pool/main/d/devscripts/%{name}_%{version}.tar.xz
