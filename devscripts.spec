@@ -5,7 +5,7 @@
 Summary:	Scripts for Debian Package maintainers
 Name:		devscripts
 Version:	2.15.7
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Development
 Source0:	http://ftp.debian.org/debian/pool/main/d/devscripts/%{name}_%{version}.tar.xz
@@ -70,6 +70,9 @@ bash-specific contructs.
 %{__sed} -i -e 's/libwww-perl/perl-libwww/g' scripts/*.pl
 %{__sed} -i -e 's/libdigest-md5-perl/perl-Digest-MD5/g' scripts/*.pl
 
+# python paths
+%{__sed} -i -e 's#setup.py install #setup.py install --prefix=%{_prefix} --install-purelib=%{py3_sitescriptdir} --install-platlib=%{py3_sitedir} #g' scripts/Makefile
+
 %build
 # LIBDIR determines where libvfork gets installed, see scripts/Makefile for LIBDIR
 %{__make} \
@@ -79,6 +82,9 @@ bash-specific contructs.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
+install -d $RPM_BUILD_ROOT%{_bindir}
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	LIBDIR=%{_libdir}/%{name}
