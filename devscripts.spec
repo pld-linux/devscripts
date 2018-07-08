@@ -21,6 +21,7 @@ BuildRequires:	gettext-tools
 BuildRequires:	libxslt
 BuildRequires:	libxslt-progs
 BuildRequires:	perl-DB_File
+BuildRequires:	perl-TimeDate
 BuildRequires:	perl-File-DesktopEntry
 BuildRequires:	perl-base
 BuildRequires:	perl-libwww
