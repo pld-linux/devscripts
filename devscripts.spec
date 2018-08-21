@@ -4,12 +4,12 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	Scripts for Debian Package maintainers
 Name:		devscripts
-Version:	2.15.7
-Release:	7
+Version:	2.18.3
+Release:	1
 License:	GPL v2+
 Group:		Development
 Source0:	http://ftp.debian.org/debian/pool/main/d/devscripts/%{name}_%{version}.tar.xz
-# Source0-md5:	1655e2c91e42cd48393c65726bc3faa9
+# Source0-md5:	7f30530c8d74d5a986b57d80cf7f5202
 Patch0:		%{name}_docbook.patch
 Patch1:		%{name}_install-layout.patch
 Patch2:		%{name}_install-man.patch
@@ -21,8 +21,8 @@ BuildRequires:	gettext-tools
 BuildRequires:	libxslt
 BuildRequires:	libxslt-progs
 BuildRequires:	perl-DB_File
-BuildRequires:	perl-TimeDate
 BuildRequires:	perl-File-DesktopEntry
+BuildRequires:	perl-TimeDate
 BuildRequires:	perl-base
 BuildRequires:	perl-libwww
 BuildRequires:	perl-modules
@@ -32,6 +32,7 @@ BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.673
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 # man for manpage-alert
@@ -83,9 +84,7 @@ bash-specific contructs.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT%{_bindir}
-
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	LIBDIR=%{_libdir}/%{name}
@@ -113,14 +112,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/dcontrol
 %attr(755,root,root) %{_bindir}/dd-list
 %attr(755,root,root) %{_bindir}/deb-reversion
+%attr(755,root,root) %{_bindir}/debc
 %attr(755,root,root) %{_bindir}/debchange
 %attr(755,root,root) %{_bindir}/debcheckout
 %attr(755,root,root) %{_bindir}/debclean
 %attr(755,root,root) %{_bindir}/debcommit
 %attr(755,root,root) %{_bindir}/debdiff
+%attr(755,root,root) %{_bindir}/debdiff-apply
 %attr(755,root,root) %{_bindir}/debi
 %attr(755,root,root) %{_bindir}/debpkg
 %attr(755,root,root) %{_bindir}/debrelease
+%attr(755,root,root) %{_bindir}/debrepro
 %attr(755,root,root) %{_bindir}/debrsign
 %attr(755,root,root) %{_bindir}/debsign
 %attr(755,root,root) %{_bindir}/debsnap
@@ -135,9 +137,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/dscverify
 %attr(755,root,root) %{_bindir}/edit-patch
 %attr(755,root,root) %{_bindir}/getbuildlog
+%attr(755,root,root) %{_bindir}/git-deborig
 %attr(755,root,root) %{_bindir}/grep-excuses
-%attr(755,root,root) %{_bindir}/licensecheck
+%attr(755,root,root) %{_bindir}/hardening-check
 %attr(755,root,root) %{_bindir}/list-unreleased
+%attr(755,root,root) %{_bindir}/ltnu
 %attr(755,root,root) %{_bindir}/manpage-alert
 %attr(755,root,root) %{_bindir}/mass-bug
 %attr(755,root,root) %{_bindir}/mergechanges
@@ -149,6 +153,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/plotchangelog
 %attr(755,root,root) %{_bindir}/pts-subscribe
 %attr(755,root,root) %{_bindir}/rc-alert
+%attr(755,root,root) %{_bindir}/reproducible-check
 %attr(755,root,root) %{_bindir}/rmadison
 %attr(755,root,root) %{_bindir}/sadt
 %attr(755,root,root) %{_bindir}/suspicious-source
@@ -184,10 +189,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/debcheckout.1*
 %{_mandir}/man1/debclean.1*
 %{_mandir}/man1/debcommit.1*
+%{_mandir}/man1/debdiff-apply.1*
 %{_mandir}/man1/debdiff.1*
 %{_mandir}/man1/debi.1*
 %{_mandir}/man1/debpkg.1*
 %{_mandir}/man1/debrelease.1*
+%{_mandir}/man1/debrepro.1*
 %{_mandir}/man1/debrsign.1*
 %{_mandir}/man1/debsign.1*
 %{_mandir}/man1/debsnap.1*
@@ -203,9 +210,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/dscverify.1*
 %{_mandir}/man1/edit-patch.1*
 %{_mandir}/man1/getbuildlog.1*
+%{_mandir}/man1/git-deborig.1*
 %{_mandir}/man1/grep-excuses.1*
-%{_mandir}/man1/licensecheck.1*
+%{_mandir}/man1/hardening-check.1*
 %{_mandir}/man1/list-unreleased.1*
+%{_mandir}/man1/ltnu.1*
 %{_mandir}/man1/manpage-alert.1*
 %{_mandir}/man1/mass-bug.1*
 %{_mandir}/man1/mergechanges.1*
@@ -217,6 +226,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/plotchangelog.1*
 %{_mandir}/man1/pts-subscribe.1*
 %{_mandir}/man1/rc-alert.1*
+%{_mandir}/man1/reproducible-check.1*
 %{_mandir}/man1/rmadison.1*
 %{_mandir}/man1/sadt.1*
 %{_mandir}/man1/suspicious-source.1*
@@ -236,6 +246,44 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitescriptdir}/%{name}*.egg-info
 %{_datadir}/%{name}
 %{perl_vendorlib}/Devscripts
+%{bash_compdir}/bts
+%{bash_compdir}/build-rdeps
+%{bash_compdir}/chdist
+%{bash_compdir}/checkbashisms
+%{bash_compdir}/dch
+%{bash_compdir}/dcontrol
+%{bash_compdir}/dd-list
+%{bash_compdir}/debc
+%{bash_compdir}/debchange
+%{bash_compdir}/debcheckout
+%{bash_compdir}/debdiff
+%{bash_compdir}/debi
+%{bash_compdir}/debsign
+%{bash_compdir}/debsnap
+%{bash_compdir}/debuild
+%{bash_compdir}/dget
+%{bash_compdir}/dscextract
+%{bash_compdir}/dscverify
+%{bash_compdir}/getbuildlog
+%{bash_compdir}/grep-excuses
+%{bash_compdir}/list-unreleased
+%{bash_compdir}/mass-bug
+%{bash_compdir}/mk-build-deps
+%{bash_compdir}/mk-origtargz
+%{bash_compdir}/pkgnames
+%{bash_compdir}/plotchangelog
+%{bash_compdir}/pts-subscribe
+%{bash_compdir}/pts-unsubscribe
+%{bash_compdir}/rc-alert
+%{bash_compdir}/rmadison
+%{bash_compdir}/transition-check
+%{bash_compdir}/uscan
+%{bash_compdir}/uupdate
+%{bash_compdir}/what-patch
+%{bash_compdir}/who-uploads
+%{bash_compdir}/whodepends
+%{bash_compdir}/wnpp-alert
+%{bash_compdir}/wnpp-check
 
 %files -n checkbashisms
 %defattr(644,root,root,755)
