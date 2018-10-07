@@ -4,12 +4,12 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	Scripts for Debian Package maintainers
 Name:		devscripts
-Version:	2.18.3
+Version:	2.18.6
 Release:	1
 License:	GPL v2+
 Group:		Development
 Source0:	http://ftp.debian.org/debian/pool/main/d/devscripts/%{name}_%{version}.tar.xz
-# Source0-md5:	7f30530c8d74d5a986b57d80cf7f5202
+# Source0-md5:	999be6ee14d60fade4d173283152dd2e
 Patch0:		%{name}_docbook.patch
 Patch1:		%{name}_install-layout.patch
 Patch2:		%{name}_install-man.patch
