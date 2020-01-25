@@ -1,7 +1,6 @@
 # TODO
 # - bash-completions subpackage
 # - some junk installed to root: "/devscripts.*"
-%include	/usr/lib/rpm/macros.perl
 Summary:	Scripts for Debian Package maintainers
 Name:		devscripts
 Version:	2.18.6
