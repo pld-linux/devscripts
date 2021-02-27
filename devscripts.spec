@@ -48,9 +48,7 @@ Scripts to make the life of a Debian Package maintainer easier.
 %package -n checkbashisms
 Summary:	Check shell scripts for common bash-specific contructs
 Group:		Development
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description -n checkbashisms
 checkbashisms checks whether a /bin/sh script contains any common
