@@ -1,12 +1,11 @@
-Install some additional man pages
-
---- devscripts-2.13.4/scripts/Makefile	2013-09-20 00:55:41.000000000 +0200
-+++ devscripts-2.13.4-new/scripts/Makefile	2013-10-17 17:21:02.612017885 +0200
-@@ -103,5 +104,7 @@ install: all
- 	install -dD $(DESTDIR)$(PERLMOD_DIR)
- 	mv $(DESTDIR)$(BINDIR)/debpkg $(DESTDIR)$(PERLMOD_DIR)
+diff -urNp -x '*.orig' devscripts-2.18.6.org/scripts/Makefile devscripts-2.18.6/scripts/Makefile
+--- devscripts-2.18.6.org/scripts/Makefile	2021-03-04 22:38:11.193746470 +0100
++++ devscripts-2.18.6/scripts/Makefile	2021-03-04 22:38:11.267079414 +0100
+@@ -147,5 +147,7 @@ install: all
+ 	install -d $(DESTDIR)$(DATA_DIR)
+ 	mv $(DESTDIR)$(BINDIR)/debpkg $(DESTDIR)$(DATA_DIR)
  	cp debpkg-wrapper $(DESTDIR)$(BINDIR)/debpkg
 +	install -dD $(DESTDIR)$(MAN1DIR)
 +	cp *.1 $(DESTDIR)$(MAN1DIR)
  
- .PHONY: test
+ .PHONY: test test_pl test_sh test_py all install clean scripts
