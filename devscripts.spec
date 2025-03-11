@@ -56,9 +56,9 @@ bash-specific contructs.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
 
 # PLD package names
 # grep -r 'you must have the.*package installed' .
@@ -76,7 +76,7 @@ bash-specific contructs.
 # LIBDIR determines where libvfork gets installed, see scripts/Makefile for LIBDIR
 %{__make} \
 	LIBDIR=%{_libdir}/%{name} \
-	CFLAGS="$RPM_OPT_FLAGS" \
+	CFLAGS="%{rpmcflags}" \
 	LDFLAGS="$RPM_LD_FLAGS"
 
 %install
